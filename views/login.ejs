@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login | CRM Manufacturing Portal</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <div class="auth-wrap">
+    <div class="auth-box">
+      <h2>Welcome Back</h2>
+      <p class="tagline">CRM Portal for Manufacturing Unit</p>
+
+      <% if (error) { %>
+        <div class="err-msg"><%= error %></div>
+      <% } %>
+
+      <form action="/login" method="POST">
+        <div class="field">
+          <label>Username</label>
+          <input type="text" name="username" placeholder="Enter your username" required>
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input type="password" name="password" placeholder="Enter your password" required>
+        </div>
+        <button type="submit" class="btn-main">Login</button>
+      </form>
+
+      <div class="divider">OR</div>
+
+      <a href="/auth/google" class="btn-google">
+        <img src="https://www.google.com/favicon.ico" alt="google">
+        Continue with Google
+      </a>
+
+      <p class="switch-link">New here? <a href="/signup">Create an account</a></p>
+    </div>
+  </div>
+
+</body>
+</html>

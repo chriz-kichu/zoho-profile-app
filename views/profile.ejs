@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Profile | CRM Manufacturing Portal</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="brand">CRM Manufacturing Portal <span>Profile Management</span></div>
+    <a href="/logout">Logout</a>
+  </div>
+
+  <div class="page-wrap">
+
+    <% if (saved) { %>
+      <div class="success-msg">Profile updated successfully</div>
+    <% } %>
+
+    <div class="profile-card">
+
+      <div class="photo-col">
+        <% if (profile.photo) { %>
+          <img src="<%= profile.photo %>" alt="profile photo">
+        <% } else { %>
+          <img src="https://ui-avatars.com/api/?name=<%= user.username %>&size=160&background=1a8c66&color=fff" alt="profile photo">
+        <% } %>
+        <div class="username-tag">@<%= user.username %></div>
+      </div>
+
+      <div class="form-col">
+        <h3>Personal & Employment Details</h3>
+
+        <form action="/profile" method="POST" enctype="multipart/form-data">
+
+          <div class="field">
+            <label>Upload Photo</label>
+            <input type="file" name="photo" accept="image/*">
+          </div>
+
+          <div class="row-2">
+            <div class="field">
+              <label>Full Name</label>
+              <input type="text" name="fullName" value="<%= profile.full_name || '' %>" placeholder="Your full name">
+            </div>
+            <div class="field">
+              <label>Education</label>
+              <input type="text" name="education" value="<%= profile.education || '' %>" placeholder="e.g. B.E Mechanical">
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Address</label>
+            <textarea name="address" rows="2" placeholder="Your full address"><%= profile.address || '' %></textarea>
+          </div>
+
+          <div class="row-2">
+            <div class="field">
+              <label>Department</label>
+              <select name="department">
+                <option value="">-- Select --</option>
+                <option value="Production" <%= profile.department === 'Production' ? 'selected' : '' %>>Production</option>
+                <option value="Quality Control" <%= profile.department === 'Quality Control' ? 'selected' : '' %>>Quality Control</option>
+                <option value="Supply Chain" <%= profile.department === 'Supply Chain' ? 'selected' : '' %>>Supply Chain</option>
+                <option value="Sales" <%= profile.department === 'Sales' ? 'selected' : '' %>>Sales</option>
+                <option value="Maintenance" <%= profile.department === 'Maintenance' ? 'selected' : '' %>>Maintenance</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Designation</label>
+              <input type="text" name="designation" value="<%= profile.designation || '' %>" placeholder="e.g. Shift Supervisor">
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Plant Location</label>
+            <input type="text" name="plantLocation" value="<%= profile.plant_location || '' %>" placeholder="e.g. Plant 2 - Chennai">
+          </div>
+
+          <button type="submit" class="save-btn">Save Profile</button>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
